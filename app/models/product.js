@@ -10,6 +10,10 @@ const ProductSchema = new Schema({
   stock: {
     type: Number,
     min: 0,
+  },
+  price: {
+    type: Number,
+    min: 0,
   }
 });
 

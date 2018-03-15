@@ -29,6 +29,10 @@ const OrderSchema = new Schema({
     require: true,
     default: false
   },
+  email: {
+    type: String,
+    default: ''
+  },
   address: {
     type: String,
     default: ''
@@ -42,6 +46,10 @@ const OrderSchema = new Schema({
     default: ''
   },
   zip: {
+    type: String,
+    default: ''
+  },
+  tracking: {
     type: String,
     default: ''
   },
