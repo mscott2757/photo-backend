@@ -27,10 +27,26 @@ export function login({ body: { username, password } }, res) {
     if (user.validPassword(password)) {
       res.json(user);
     } else {
-      res.status(400).json({
+      res.status(401).json({
         message: 'Incorrect Password'
       });
     }
-  }).catch(errHandler(res));
+  }).catch((err) => {
+    res.status(401).json({
+      message: "User not found"
+    });
+  });
+}
+
+export function validateCookie({ cookies: { userId } }, res, next) {
+  User.findById(userId).then((user) => {
+    if (user) {
+      next();
+    } else {
+      res.status(401).json({
+        message: 'User not logged in'
+      })
+    }
+  }).catch(errHandler);
 }
 

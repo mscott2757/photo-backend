@@ -1,6 +1,6 @@
 export function errHandler(res) {
   return (err) => {
-    res.json(err);
+    res.status(400).json(err);
   }
 }
 
