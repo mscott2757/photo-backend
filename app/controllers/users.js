@@ -25,17 +25,38 @@ export function deleteUser({ params: { user_id } }, res) {
 export function login({ body: { username, password } }, res) {
   User.findOne({ username }).then((user) => {
     if (user.validPassword(password)) {
-      res.json(user);
+      res.json({
+        success: true,
+       _id: user._id
+      });
     } else {
-      res.status(401).json({
+      res.json({
+        success: false,
         message: 'Incorrect Password'
       });
     }
   }).catch((err) => {
-    res.status(401).json({
+    res.json({
+      success: false,
       message: "User not found"
     });
   });
+}
+
+export function validateUser({ body: { _id } }, res) {
+  User.findById(_id).then((user) => {
+    if (user) {
+      res.json({
+        success: true,
+        _id: user._id
+      });
+    } else {
+      res.json({
+        success: false,
+        message: 'User not logged in, redirecting to login page'
+      });
+    }
+  }).catch(errHandler);
 }
 
 export function validateCookie({ cookies: { userId } }, res, next) {

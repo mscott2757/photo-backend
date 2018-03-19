@@ -4,9 +4,9 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 
 import mongoose from 'mongoose';
-mongoose.connect('mongodb://localhost/photo');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/photo');
 
-const whitelist = ['http://localhost:3000'];
+const whitelist = [process.env.REACT_FRONTEND, 'http://localhost:3000'];
 const corsOptions = {
   origin: function (origin, callback) {
     if (!origin || whitelist.indexOf(origin) !== -1) {

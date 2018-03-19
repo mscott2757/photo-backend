@@ -1,8 +1,9 @@
 import express from 'express';
 const router = express.Router();
-import { login, validateCookie } from '../controllers/users';
+import { login, validateUser, validateCookie } from '../controllers/users';
 
 router.route('/login').post(login);
+router.route('/validate').post(validateUser);
 router.use(validateCookie);
 
 router.use('/products', require('./products'));
