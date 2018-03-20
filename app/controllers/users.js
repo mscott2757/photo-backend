@@ -66,6 +66,7 @@ export function validateCookie({ cookies: { userId } }, res, next) {
     } else {
       res.status(401).json({
         message: 'User not logged in',
+        hello: 'world',
         userId
       });
     }
