@@ -60,13 +60,14 @@ export function validateUser({ body: { _id } }, res) {
 }
 
 export function validateCookie({ cookies: { userId } }, res, next) {
-  User.findById(userId).then((user) => {
+  User.findById(userId).exec().then((user) => {
     if (user) {
       next();
     } else {
       res.status(401).json({
-        message: 'User not logged in'
-      })
+        message: 'User not logged in',
+        userId
+      });
     }
   }).catch(errHandler);
 }
