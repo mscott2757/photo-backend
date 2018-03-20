@@ -6,7 +6,11 @@ import cookieParser from 'cookie-parser';
 import mongoose from 'mongoose';
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/photo');
 
-const whitelist = ['https://mason-photo-dash.herokuapp.com', 'http://localhost:3000'];
+const whitelist = [
+  'https://mason-photo-dash.herokuapp.com',
+  'https://photo-dash.masonchan.co',
+  'http://localhost:3000'
+];
 const corsOptions = {
   origin: function (origin, callback) {
     if (!origin || whitelist.indexOf(origin) !== -1) {
