@@ -13,7 +13,7 @@ const whitelist = [
 ];
 const corsOptions = {
   origin: function (origin, callback) {
-    if (!origin || whitelist.indexOf(origin) !== -1) {
+    if ((!origin && process.env.NODE_ENV !== 'production') || whitelist.indexOf(origin) !== -1) {
       callback(null, true)
     } else {
       callback(new Error('Not allowed by CORS'))
